@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PhotoGallery.View.SignIn"
+             Title="Sign In" NavigationPage.HasNavigationBar="False" BackgroundColor="White"
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="Teal" />
+        </Style>
+    </ContentPage.Resources>
+
+        <Grid  VerticalOptions="Start">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Label Text="Log In"  FontSize="35" VerticalOptions="Start"
+                   FontAttributes="Bold" Margin="10,10,0,0" HorizontalOptions="Start"  />
+        <StackLayout  Grid.Row="1" Margin="0,50,0,0" VerticalOptions="Center">
+            <Image Source="logo.png" HorizontalOptions="Center" VerticalOptions="Center"
+          HeightRequest="300" WidthRequest="300"/>
+        </StackLayout>
+
+        <StackLayout Grid.Row="2" Spacing="30" Margin="20">
+            <Entry Placeholder="User Name"  Text="{Binding UserName, Mode=TwoWay}"
+                      />
+            <Entry Placeholder="Password" IsPassword="True"  Text="{Binding Password, Mode=TwoWay}"
+                      />
+
+            <Button Text="Sign In" FontAttributes="Bold" TextColor="Black" 
+                      CornerRadius="20" Command="{Binding SigninCmd}"/>
+
+            <Label HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Sign Up" FontAttributes="Bold" TextColor="Teal">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SignUpCmd}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+
+
+
+    </Grid>
+
+</ContentPage>

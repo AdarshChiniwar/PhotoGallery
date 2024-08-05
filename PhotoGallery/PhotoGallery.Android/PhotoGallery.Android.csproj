@@ -65,6 +65,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQliteDroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -89,13 +90,42 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\drawable\Impressionismimage.png" />
+    <AndroidResource Include="Resources\drawable\Impressionismposter.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhotoGallery\PhotoGallery.csproj">
       <Project>{9C95BF7B-07D2-4EA0-A2CA-BFB2E2A1A883}</Project>
       <Name>PhotoGallery</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\abstractimage.png" />
+    <AndroidResource Include="Resources\drawable\abstractposter.png" />
+    <AndroidResource Include="Resources\drawable\popimage.png" />
+    <AndroidResource Include="Resources\drawable\popposter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\realismimage.jpeg" />
+    <AndroidResource Include="Resources\drawable\realismposter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\waterimage.png" />
+    <AndroidResource Include="Resources\drawable\waterposter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\painterlyimage.png" />
+    <AndroidResource Include="Resources\drawable\Painterlyposter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CompleteHeart.png" />
+    <AndroidResource Include="Resources\drawable\EmptyHeart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
