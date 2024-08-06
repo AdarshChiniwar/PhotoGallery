@@ -7,7 +7,7 @@ namespace PhotoGallery.Model
 {
     public class Category
     {
-        [AutoIncrement, PrimaryKey]
+        [PrimaryKey]
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string CategoryPoster { get; set; }

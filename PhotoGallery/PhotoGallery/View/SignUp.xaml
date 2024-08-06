@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BackgroundColor="White"
              x:Class="PhotoGallery.View.SignUp" NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -32,9 +32,9 @@
         </StackLayout>
 
         <StackLayout Grid.Row="2" Spacing="30" Margin="20">
-            <Entry Placeholder="User Name"  Text="{Binding UserName, Mode=TwoWay}"
+            <Entry Placeholder="User Name" PlaceholderColor="Gray" BackgroundColor="WhiteSmoke" Text="{Binding UserName, Mode=TwoWay}"
                       />
-            <Entry Placeholder="Password" IsPassword="True"  Text="{Binding Password, Mode=TwoWay}"
+            <Entry Placeholder="Password" PlaceholderColor="Gray" BackgroundColor="WhiteSmoke" IsPassword="True"  Text="{Binding Password, Mode=TwoWay}"
                        />
             
             <Button Text="Sign Up" FontAttributes="Bold" 

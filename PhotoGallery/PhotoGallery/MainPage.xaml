@@ -4,6 +4,11 @@
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:helpers="clr-namespace:PhotoGallery.Helpers" NavigationPage.HasNavigationBar="False"
              x:Class="PhotoGallery.MainPage" BackgroundColor="WhiteSmoke">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentPage.Resources>
 
     <Grid Margin="20,0,0,0">
         <Grid.RowDefinitions>
@@ -40,9 +45,9 @@
                Command="{Binding ViewOrdersHistoryCommand}"/>
 
 
-            <Label Text="{Binding UserCartItemsCount}" FontSize="Subtitle"
+            <!--<Label Text="{Binding UserCartItemsCount}" FontSize="Subtitle"
          Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
-         HorizontalTextAlignment="End" VerticalTextAlignment="Start" />
+         HorizontalTextAlignment="End" VerticalTextAlignment="Start" />-->
 
             <ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" BackgroundColor="Transparent"
                Source="{FontImage FontFamily=FontAwesome,
@@ -95,7 +100,7 @@
                         </Grid.RowDefinitions>
                         <Frame HeightRequest="50" HasShadow="False"
                             BackgroundColor="White"
-                            CornerRadius="10">
+                            CornerRadius="360">
                             <Image Source="{Binding ImageUrl}"
                                 Grid.Row="0"/>
                         </Frame>
@@ -108,7 +113,7 @@
         </CollectionView>
 
 
-        <Label Grid.Row="3" Text="Latest Arts" FontAttributes="Bold" FontSize="Title" TextColor="Black" />
+        <Label Grid.Row="3" Text="Top Arts" FontAttributes="Bold" FontSize="Title" TextColor="Black" />
 
 
         <CollectionView ItemsSource="{Binding LatestItems}"

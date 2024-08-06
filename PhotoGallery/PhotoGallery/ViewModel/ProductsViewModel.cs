@@ -113,27 +113,37 @@ namespace PhotoGallery.ViewModel
 
         private async Task ViewOrderHistoryAsync()
         {
-            // await Application.Current.MainPage.Navigation.PushModalAsync(new OrdersHistoryView());
+            await Application.Current.MainPage.Navigation.PushModalAsync(new OrdersHistoryView());
         }
 
         private async Task ViewCartAsync()
         {
-            //await Application.Current.MainPage.Navigation.PushModalAsync(new CartView());
+            var count = sqliteConnection.Table<CartItem>().Count();
+            if (count == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Info", "No cart items available!", "OK");
+                return;
+            }
+            await Application.Current.MainPage.Navigation.PushModalAsync(new CartView());
         }
 
         private async Task LogoutAsync()
         {
-            Preferences.Set("user", string.Empty);
-            ClearAllDataFromCart();
-            Application.Current.MainPage = new NavigationPage(new SignIn());
+            bool result = await Application.Current.MainPage.DisplayAlert("Info", "Are you sure you want to logout? items added in the cart will be deleted", "Ok", "Cancel");
+            if (result)
+            {
+                Preferences.Set("user", string.Empty);
+                ClearAllDataFromCart();
+                Application.Current.MainPage = new NavigationPage(new SignIn());
+            }
             //await Application.Current.MainPage.Navigation.PushModalAsync(new LogoutView());
-          
+
 
         }
 
         private async void GetCategories()
         {
-           
+
             try
             {
                 Categories.Clear();
@@ -152,9 +162,21 @@ namespace PhotoGallery.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
-        private void ClearAllDataFromCart()
+        private async void ClearAllDataFromCart()
         {
+            try
+            {
+                var data = sqliteConnection.Table<CartItem>().ToList();
+                foreach (var item in data)
+                {
+                    sqliteConnection.Delete(item);
+                }
+            }
 
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
         }
         private async void GetLatestItems()
         {
@@ -171,11 +193,11 @@ namespace PhotoGallery.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Info", "No Latest items available!", "OK");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
-   
+
             //var data = await new FoodItemService().GetLatestFoodItemsAsync();
             //
             //foreach (var item in data)

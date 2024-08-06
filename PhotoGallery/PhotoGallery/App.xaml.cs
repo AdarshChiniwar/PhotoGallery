@@ -18,9 +18,9 @@ namespace PhotoGallery
             string user = Preferences.Get("user", string.Empty);
             Application.Current.UserAppTheme = OSAppTheme.Light;
             CreateTables();
-            //HelpersClass helpers = new HelpersClass();
-            //helpers.AddCategories();
-            //helpers.AddPhotoItems();
+            HelpersClass helpers = new HelpersClass();
+            helpers.AddCategories();
+            helpers.AddPhotoItems();
             if (string.IsNullOrEmpty(user))
             {
                 MainPage = new NavigationPage(new SignIn());
@@ -39,6 +39,8 @@ namespace PhotoGallery
             sqliteConnection.CreateTable<PhotoItem>();
             sqliteConnection.CreateTable<CartItem>();
             sqliteConnection.CreateTable<User>();
+            sqliteConnection.CreateTable<OrderDetails>();
+            sqliteConnection.CreateTable<Order>();
         }
 
         protected override void OnStart()

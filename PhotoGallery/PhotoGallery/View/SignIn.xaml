@@ -33,9 +33,9 @@
         </StackLayout>
 
         <StackLayout Grid.Row="2" Spacing="30" Margin="20">
-            <Entry Placeholder="User Name"  Text="{Binding UserName, Mode=TwoWay}"
+            <Entry Placeholder="User Name" BackgroundColor="WhiteSmoke" Text="{Binding UserName, Mode=TwoWay}" PlaceholderColor="Gray"
                       />
-            <Entry Placeholder="Password" IsPassword="True"  Text="{Binding Password, Mode=TwoWay}"
+            <Entry Placeholder="Password" IsPassword="True" BackgroundColor="WhiteSmoke"  Text="{Binding Password, Mode=TwoWay}" PlaceholderColor="Gray"
                       />
 
             <Button Text="Sign In" FontAttributes="Bold" TextColor="Black" 

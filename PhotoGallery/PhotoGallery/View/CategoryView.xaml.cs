@@ -26,9 +26,13 @@ namespace PhotoGallery.View
             await Navigation.PopModalAsync();
         }
 
-        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var selectedProduct = e.CurrentSelection.FirstOrDefault() as PhotoItem;
+            if (selectedProduct == null)
+                return;
+            await Navigation.PushModalAsync(new ProductDetailsView(selectedProduct));
+            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }

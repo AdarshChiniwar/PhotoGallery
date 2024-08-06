@@ -68,7 +68,7 @@ namespace PhotoGallery.ViewModel
             try
             {
                 PhotoItemByCategory.Clear();
-                var details = (from x in sqliteConnection.Table<PhotoItem>() select x).ToList().Take(3);
+                var details = (from x in sqliteConnection.Table<PhotoItem>() select x).ToList();
                 foreach (var item in details)
                 {
                     if(item.CategoryID == categoryID)

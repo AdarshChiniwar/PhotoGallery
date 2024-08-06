@@ -3,6 +3,7 @@ using PhotoGallery.Model;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -20,63 +21,85 @@ namespace PhotoGallery.Helpers
             sqliteConnection = DependencyService.Get<Isqlite>().GetConnection();
         }
 
-        public void AddCategories()
+        public async void AddCategories()
         {
-            Categories = new List<Category>()
+            try
+            {
+                var details = (from x in sqliteConnection.Table<Category>() select x).ToList();
+                foreach (var item in details)
+                {
+                    sqliteConnection.Delete(item);
+                }
+
+                Categories = new List<Category>()
             {
                 new Category(){
-                 
+
+                    CategoryID=1,
                     CategoryName = "Impressionism",
                     CategoryPoster = "Impressionismposter.png",
                     ImageUrl = "Impressionismimage.png"
                 },
                 new Category(){
-                
+                 CategoryID=2,
                     CategoryName = "Abstract art",
                     CategoryPoster = "abstractposter.png",
                     ImageUrl = "abstractimage.png"
                 },
                 new Category(){
-                  
+                   CategoryID=3,
                     CategoryName = "Pop art",
                     CategoryPoster = "popposter.png",
                     ImageUrl = "popimage.png"
                 },
                 new Category(){
-                  
+                    CategoryID=4,
                     CategoryName = "Realism",
                     CategoryPoster = "realismposter.jpg",
                     ImageUrl = "realismimage.jpeg"
                 },
                 new Category(){
-              
+                CategoryID=5,
                     CategoryName = "Water Color",
                     CategoryPoster = "waterposter.png",
                     ImageUrl = "waterimage.png"
                 },
                 new Category(){
-                 
+                   CategoryID=6,
                     CategoryName = "Painterly",
                     CategoryPoster = "Painterlyposter.png",
                     ImageUrl = "painterlyimage.png"
                 }
             };
 
-            foreach (var item in Categories)
-            {
-                int result = sqliteConnection.Insert(item);
+                foreach (var item in Categories)
+                {
+                    int result = sqliteConnection.Insert(item);
+                }
             }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+          
         }
 
-        public void AddPhotoItems()
+        public async void AddPhotoItems()
         {
-            PhotoItems = new List<PhotoItem>()
+            try
+            {
+                var details = (from x in sqliteConnection.Table<PhotoItem>() select x).ToList();
+                foreach (var item in details)
+                {
+                    sqliteConnection.Delete(item);
+                }
+                PhotoItems = new List<PhotoItem>()
             {
                 new PhotoItem
                 {
                     ProductID = 1,
                     CategoryID = 1,
-                    ImageUrl = "https://www.jacksonsart.com/blog/wp-content/uploads/2015/04/claude-monet-impression-sunrise.jpg",
+                    ImageUrl = "jacksonart.jpg",
                     Name = "Jackson's Art",
                     Description = "Impressionism - Jackson's Art",
                     Rating = " 4.8",
@@ -88,7 +111,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 2,
                     CategoryID = 1,
-                    ImageUrl = "https://media.nga.gov/iiif/99758d9d-c10b-4d02-a198-7e49afb1f3a6/full/!740,560/0/default.jpg",
+                    ImageUrl = "women.jpg",
                     Name = "Painting of women and child",
                     Description = "Impressionism - Painting",
                     Rating = " 4.8",
@@ -100,7 +123,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 3,
                     CategoryID = 4,
-                    ImageUrl = "https://study.com/cimages/multimages/16/512px-jules_bastien-lepage_-_october_-_google_art_project7519628057672595799.jpg",
+                    ImageUrl = "farm.jpg",
                     Name = "Women working in farm",
                     Description = "Realism - Painting",
                     Rating = " 4.8",
@@ -112,7 +135,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 4,
                     CategoryID = 5,
-                    ImageUrl = "https://i.etsystatic.com/12377040/r/il/3c045d/5577946433/il_fullxfull.5577946433_op9f.jpg",
+                    ImageUrl = "water.webp",
                     Name = "Nature",
                     Description = "Water Color - Painting",
                     Rating = " 4.8",
@@ -124,7 +147,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 5,
                     CategoryID = 2,
-                    ImageUrl = "https://images-cdn.ubuy.co.in/634e37b7d57ac13b6907b5b8-v-inspire-art-30x40-inch-abstract-art.jpg",
+                    ImageUrl = "vinspire.jpg",
                     Name = "V Inspire",
                     Description = "Abstract Art - Painting",
                     Rating = " 4.4",
@@ -136,7 +159,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 6,
                     CategoryID = 2,
-                    ImageUrl = "https://cdn11.bigcommerce.com/s-x49po/images/stencil/1500x1500/products/86342/252452/1655983273158_20220616-180740__46890.1687004840.jpg?c=2",
+                    ImageUrl = "musician.jpg",
                     Name = "Musician",
                     Description = "Abstract Art - Painting",
                     Rating = " 4.8",
@@ -148,7 +171,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 7,
                     CategoryID = 3,
-                    ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpapt5r8-97C3JbqrZ3IZYV4Cs7ZVsxUBFdg&s",
+                    ImageUrl = "paints.jpeg",
                     Name = "Popart",
                     Description = "Pop Art - Paints",
                     Rating = " 4.4",
@@ -160,7 +183,7 @@ namespace PhotoGallery.Helpers
                 {
                     ProductID = 8,
                     CategoryID = 6,
-                    ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCGk5HAssigDgEYBIffSl288UGy_-eh8F42w&s",
+                    ImageUrl = "village.jpeg",
                     Name = "Village",
                     Description = "Painterly - Paints",
                     Rating = " 4.8",
@@ -170,10 +193,16 @@ namespace PhotoGallery.Helpers
                 }
              };
 
-            foreach (var item in PhotoItems)
-            {
-                int result = sqliteConnection.Insert(item);
+                foreach (var item in PhotoItems)
+                {
+                    int result = sqliteConnection.Insert(item);
+                }
             }
+            catch(Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+          
         }
     }
 }
