@@ -18,6 +18,7 @@ using Xamarin.Forms;
 
 namespace PhotoGallery.Droid
 {
+    ///data/user/0/com.companyname.photogallery/files/.local/share/photogallery.sql
     public class SQliteDroid : Isqlite
     {
         public static string fullpath;
