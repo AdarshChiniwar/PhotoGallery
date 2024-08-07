@@ -143,7 +143,7 @@
 
                             <Frame Grid.Row="1" Margin="0,0,20,0" Grid.Column="1" BackgroundColor="White" CornerRadius="15"
                             HorizontalOptions="End" >
-                                <Label Text="{Binding Price, StringFormat='{0:c}'}" FontSize="Small"
+                                <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="Small"
                                 FontAttributes="Bold"   VerticalOptions="Center"/>
                             </Frame>
                             <Label Grid.Row="1" Text="{Binding Name}" 

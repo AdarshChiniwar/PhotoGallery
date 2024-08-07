@@ -69,7 +69,7 @@
                     <CollectionView.GroupFooterTemplate>
                         <DataTemplate>
                             <StackLayout BackgroundColor="#eeeeee">
-                                <Label Text="{Binding TotalCost,StringFormat='Total Cost : {0:c}'}"
+                                <Label Text="{Binding TotalCost, StringFormat='Total Cost: ${0:F2}'}"
                           TextColor="Black"
                           FontAttributes="Bold" />
                                 <BoxView BackgroundColor="#B2DFDB"
@@ -123,7 +123,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Price : " />
-                                                <Span Text="{Binding Price, StringFormat='{0:c}'}" 
+                                                <Span Text="{Binding Price, StringFormat='${0:F2}'}" 
                                           FontAttributes="Bold"/>
                                             </FormattedString>
                                         </Label.FormattedText>

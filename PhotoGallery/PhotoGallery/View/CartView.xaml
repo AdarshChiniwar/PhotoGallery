@@ -10,96 +10,147 @@
             <Setter Property="TextColor" Value="Black" />
         </Style>
     </ContentPage.Resources>
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <BoxView Grid.Row="0" />
-        <Label Text="The Photo Cart" FontSize="40" 
+    <Grid>
+        <Grid IsVisible="{Binding IsCartViewVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <BoxView Grid.Row="0" />
+            <Label Text="The Photo Cart" FontSize="40" 
                FontFamily="CabinSketch"
                HorizontalOptions="Center" VerticalOptions="Center" />
 
-        <Label x:Name="LabelName" FontSize="Subtitle" 
+            <Label x:Name="LabelName" FontSize="Subtitle" 
             HorizontalOptions="Center" VerticalOptions="End" />
 
-        <ImageButton Source="{FontImage FontFamily=FontAwesome, 
+            <ImageButton Source="{FontImage FontFamily=FontAwesome, 
                      Glyph={x:Static helpers:IconFont.ArrowLeft}, Size=30, Color=Teal}"
                      Grid.Row="0" HorizontalOptions="Start" Aspect="AspectFit" BackgroundColor="Transparent"
                      VerticalOptions="Start" Margin="10,30" Clicked="ImageButton_Clicked" />
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding CartItems}" >
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame CornerRadius="20" HasShadow="True" Padding="10" >
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="20" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Text="Id" Grid.Column="0" FontSize="Body"   HorizontalOptions="Center" VerticalOptions="Center"
+            <CollectionView Grid.Row="1" ItemsSource="{Binding CartItems}" >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20" HasShadow="True" Padding="10" >
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Id" Grid.Column="0" FontSize="Body"   HorizontalOptions="Center" VerticalOptions="Center"
                                      />
-                            <Label Text="{Binding ProductId}" Grid.Column="2" FontSize="Body"
+                                <Label Text="{Binding ProductId}" Grid.Column="2" FontSize="Body"
                             TextColor="Teal"   HorizontalOptions="Center" VerticalOptions="Center"
                                   />
 
 
-                            <Label Text="Name" Grid.Row="1" FontSize="Body"
+                                <Label Text="Name" Grid.Row="1" FontSize="Body"
                                    HorizontalOptions="Center" VerticalOptions="Center"
                                     />
-                            <Label Text="{Binding ProductName}" Grid.Row="1" Grid.Column="2" FontSize="Body"
+                                <Label Text="{Binding ProductName}" Grid.Row="1" Grid.Column="2" FontSize="Body"
                                    HorizontalOptions="Center" VerticalOptions="Center"
                                    TextColor="Teal" />
 
-                            <Label Text="Price" Grid.Row="2" FontSize="Body"
+                                <Label Text="Price" Grid.Row="2" FontSize="Body"
                                    HorizontalOptions="Center" VerticalOptions="Center"
                                />
-                            <Label Text="Qty" Grid.Row="3" FontSize="Body"
+                                <Label Text="Qty" Grid.Row="3" FontSize="Body"
                                    HorizontalOptions="Center" VerticalOptions="Center"
                                />
-                            <Label Text="Cost" Grid.Row="4" FontSize="Body"
+                                <Label Text="Cost" Grid.Row="4" FontSize="Body"
                                    HorizontalOptions="Center" VerticalOptions="Center"
                               />
 
-                            <Label Text="{Binding Price}" Grid.Row="2" Grid.Column="2" FontSize="Body"
+                                <Label Text="{Binding Price}" Grid.Row="2" Grid.Column="2" FontSize="Body"
                                TextColor="Teal" HorizontalOptions="Center" VerticalOptions="Center"
                                 />
-                            <Label Text="{Binding Quantity}" Grid.Row="3" Grid.Column="2" FontSize="Body"
+                                <Label Text="{Binding Quantity}" Grid.Row="3" Grid.Column="2" FontSize="Body"
                                TextColor="Teal" HorizontalOptions="Center" VerticalOptions="Center"
                                   />
-                            <Label Text="{Binding Cost}" Grid.Row="4" Grid.Column="2" FontSize="Body"
+                                <Label Text="{Binding Cost}" Grid.Row="4" Grid.Column="2" FontSize="Body"
                              TextColor="Teal" HorizontalOptions="Center" VerticalOptions="Center"
                                    />
 
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Label Text="{Binding TotalCost, StringFormat='Total Cost : {0:c}'}"
+            <Label Text="{Binding TotalCost, StringFormat='Total Cost: ${0:F2}'}"
          Grid.Row="2" HorizontalTextAlignment="End" FontSize="Subtitle" Margin="5"
          TextColor="Black" />
 
-        <Button Text="COD" Grid.Row="3" TextColor="White"
-          Command="{Binding PlaceOrdersCommand}" Margin="10"
-          HorizontalOptions="Start" CornerRadius="20"
+            <Button Text="Pay Now" Grid.Row="3" TextColor="White"
+          Command="{Binding SwithToPaymentCmd}" Margin="10"
+          HorizontalOptions="Center" CornerRadius="20"
           BackgroundColor="Black"/>
 
-        <Button Text="Saved Card" Grid.Row="3" TextColor="White"
-            Command="{Binding PlaceOrdersCommand}" Margin="10"
-            HorizontalOptions="End" CornerRadius="20"
-            BackgroundColor="Black"/>
+
+        </Grid>
+
+
+        <Grid IsVisible="{Binding IsPaymentPageVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="Auto" />
+                <RowDefinition  Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+             <ImageButton Source="{FontImage FontFamily=FontAwesome, 
+          Glyph={x:Static helpers:IconFont.ArrowLeft}, Size=30, Color=Teal}"
+          Grid.Row="0" HorizontalOptions="Start" Aspect="AspectFit" BackgroundColor="Transparent"
+          VerticalOptions="Start" Margin="10,30" Command="{Binding BacktoCartCmd}" />
+           
+            <StackLayout Grid.Row="1"  Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Amount to be Paid   - " FontAttributes="Bold" FontSize="Title"/>
+                <Label  Text="{Binding TotalCost}" FontAttributes="Bold" FontSize="Title"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Spacing="10" Margin="10" HorizontalOptions="FillAndExpand">
+                <Label Text="Payment Details - " FontAttributes="Bold"/>
+                <Entry Placeholder="Name" Text="{Binding CardName}"/>
+                <!--<StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">-->
+                    <Entry Placeholder="Card No" Keyboard="Numeric" Text="{Binding CardNumber}"/>
+                    <Entry Placeholder="CVV" Keyboard="Numeric" IsPassword="True" Text="{Binding Cvv}"/>
+                <!--</StackLayout>-->
+                <Label Text="Expiry Date - " FontAttributes="Bold"/>
+                <DatePicker />
+                <Label Text="Billing Address - " />
+                <Entry Placeholder="Address Line 1" Text="{Binding AddressLine1}"/>
+                <Entry Placeholder="Address Line 2" Text="{Binding AddressLine2}"/>
+                <!--<StackLayout Orientation="Horizontal" Spacing="10">-->
+                    <Entry Placeholder="Phone No" Keyboard="Numeric" Text="{Binding PhoneNumber}"/>
+                    <Entry Placeholder="Pin Code" Keyboard="Numeric"  Text="{Binding PinCode}"/>
+                <!--</StackLayout>-->
+                <Entry Placeholder="City" Text="{Binding City}"/>
+
+                <Button Text="Pay Now" Grid.Row="3" TextColor="White"
+                        Command="{Binding PlaceOrdersCommand}" Margin="10"
+                        HorizontalOptions="Center" CornerRadius="20"
+                        BackgroundColor="Black"/>
+            </StackLayout>
+
+           
+
+
+        </Grid>
     </Grid>
-   
+
+
+
+
 </ContentPage>
